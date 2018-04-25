@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- gernius front -->
+  <include file="$(find francor_launch)/launch/camera_genius.launch" />
+
+  <!-- orbec 3d cam -->
+
+  <!-- sensor head (rosserial) -->
+  <node name="serial_node_sensor_head" pkg="rosserial_python" type="serial_node.py" output="screen">
+    <param name="port" value="/dev/ttyUSB1" />
+    <param name="baud" value="57600" />
+  </node>
+
+  <!-- motor controller -->
+  <node name="motor_controller_node" pkg="francor_motor_controller" type="motor_controller" output="screen">
+  </node>
+
+
+</launch>
