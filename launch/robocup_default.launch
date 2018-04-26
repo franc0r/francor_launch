@@ -14,7 +14,7 @@
   </node>
 
   <!-- motor controller -->
-  <node name="motor_controller_node" pkg="francor_motor_controller" type="motor_controller" output="screen">
+  <node name="motor_controller_node" pkg="francor_motor_controller" type="motor_controller" output="log">
   </node>
 
 

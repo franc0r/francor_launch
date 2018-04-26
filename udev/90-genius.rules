@@ -1,0 +1,3 @@
+#SUBSYSTEM=="usb", ATTR{serial}=="200901010001", ATTR{idVendor}=="0x8086", ATTR{idProduct}=="0002", SYMLINK+="genius"
+SUBSYSTEM=="video4linux", BUS=="usb", SYSFS{idVendor}=="0x8086", SYSFS{idProduct}=="708c",SYMLINK+="genius"
+

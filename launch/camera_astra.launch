@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 	<node name="astra" pkg="usb_cam" type="usb_cam_node" output="screen">
-		<param name="video_device"		type="string" value="/dev/video1"           />
+		<param name="video_device"		type="string" value="/dev/v4l/by-id/usb-Astra_Pro_HD_Camera_Astra_Pro_HD_Camera-video-index0"           />
 		<param name="image_width"			type="int" value="640"/>
 		<param name="image_height"    type="int" value="480" />
 		<param name="framerate"       type="int" value="30" />	
