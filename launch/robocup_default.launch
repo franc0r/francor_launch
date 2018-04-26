@@ -11,10 +11,10 @@
 
 
   <!-- topics to multiplex -->
-  <arg name="driver_camera_topic" default="front_cam/image_raw/compressed"/>
-  <arg name="manip_camera_topic"  default="back_cam/image_raw/compressed"/>
+  <arg name="front_cam_topic" default="front_cam/image_raw/compressed"/>
+  <arg name="back_cam_topic"  default="back_cam/image_raw/compressed"/>
 
-  <node pkg="topic_tools" type="mux" name="mux_drive_img" args="drive_cam/compressed $(arg driver_camera_topic) $(arg manip_camera_topic)">
+  <node name="mux_drive_img" pkg="topic_tools" type="mux"  args="drive_cam/compressed $(arg front_cam_topic) $(arg back_cam_topic)">
     <!--remap from="mux/selected" to="drive_cam/select"/--> 
   </node>
 
