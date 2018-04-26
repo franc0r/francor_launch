@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<launch>
+
+<!-- robot_state_publisher is used to publish laser_mount > laser tf
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find sick_tim)/urdf/example.urdf.xacro'" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+-->
+
+  <arg name="publish_static_laser_tf" default="true" />
+
+  <!-- <group if="$(arg publish_static_laser_tf)">
+    <node name="static_tf_base_link_laser" pkg="tf" type="static_transform_publisher" args="0.135 0.0 0.15 0 0 0 /base /laser 20" />
+  </group> -->
+
+  <node name="sick_tim571_2050101" pkg="sick_tim" type="sick_tim551_2050001" respawn="false" output="screen">
+      <!-- <param name="min_ang" type="double" value="-2.0" />
+      <param name="max_ang" type="double" value="2.0" /> -->
+      <param name="intensity" type="bool" value="false" />
+      <param name="time_offset" type="double" value="0.0" />
+ 
+      <!-- default values
+      <param name="skip" type="int" value="0" />
+      <param name="frame_id" type="str" value="laser" />
+      <param name="publish_datagram" type="bool" value="False" />
+      <param name="subscribe_datagram" type="bool" value="false" />
+      <param name="device_number" type="int" value="0" />
+      <param name="range_min" type="double" value="0.05" />
+    -->
+    <param name="range_max" type="double" value="25.0" />
+
+    <!-- Older versions of the scanner firmware report an incorrect time_increment.
+         If you get a warning about time_increment, uncomment this. -->
+    <!-- <param name="time_increment" type="double" value="0.000061722" /> -->
+
+    <!-- Uncomment this to enable TCP instead of USB connection; 'hostname' is the host name or IP address of the laser scanner
+    In cases where a race condition exists and the computer boots up before the TIM is ready, increase 'timelimit.'
+    -->
+    <!-- <param name="hostname" type="string" value="192.168.0.10" />
+    <param name="port" type="string" value="2112" />
+    <param name="timelimit" type="int" value="5" /> -->
+  </node>
+
+</launch>
