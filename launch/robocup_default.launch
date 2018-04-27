@@ -9,6 +9,8 @@
   <!-- orbec 3d cam (only rgb)-->
   <include file="$(find francor_launch)/launch/camera_astra.launch" />
 
+  <!-- sick tim -->
+  <include file"$(find francor_launch)/launch/sick_tim.launch" />
 
   <!-- topics to multiplex -->
   <arg name="front_cam_topic" default="front_cam/image_raw/compressed"/>
