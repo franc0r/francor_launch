@@ -30,5 +30,6 @@
     <param name="speed_bogie_up"  type="double" value="0.2"/>
   </node>
 
-
+  <!-- thermal -->
+  <node name="seek_thermo" pkg="seekthermal_ros" type="seekthermal_ros_node"/>
 </launch>
