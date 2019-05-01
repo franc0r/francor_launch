@@ -1,0 +1,16 @@
+<launch>
+  <arg name="parameter_file" default="$(find francor_launch)/param/ydlidar.yaml"/>
+  <arg name="output"         default="screen"/>
+  <arg name="respwan"        default="true"/>
+
+  <node name="ydlidar_node"  pkg="ydlidar"  type="ydlidar_node" output="$(arg output)" respawn="$(arg respwan)" >
+    <!-- system configuration -->
+    <param name="port"         type="string" value="/dev/ydlidar"/>  
+    <param name="baudrate"     type="int"    value="115200"/>
+    <param name="frame_id"     type="string" value="laser"/>
+
+    <!-- parameter -->
+    <rosparam command="load" file="$(find francor_launch)/param/ydlidar.yaml" />
+  </node>
+  
+</launch>

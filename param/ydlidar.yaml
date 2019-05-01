@@ -1,0 +1,14 @@
+angle_min: -120
+angle_max: 120
+range_min: 0.08
+range_max: 12
+# Sample Rate 6000 times/sec
+sample_rate: 6
+# frequency 12 kHz
+frequency: 12
+# auto reconnect
+auto_reconnect: true
+
+# parameter found in example launch file of ydlidar ros package. No idea what they do.
+low_exposure: false
+resolution_fixed: true

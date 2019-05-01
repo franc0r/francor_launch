@@ -9,10 +9,10 @@
   <include file="$(find francor_launch)/launch/camera_genius_back.launch" />
 
   <!-- orbec 3d cam (only rgb)-->
-  <include file="$(find francor_launch)/launch/camera_astra.launch" />
+  <!--include file="$(find francor_launch)/launch/camera_astra.launch" /-->
 
   <!-- sick tim -->
-  <include file="$(find francor_launch)/launch/sick_tim.launch" />
+  <!--include file="$(find francor_launch)/launch/sick_tim.launch" /-->
 
   <!-- topics to multiplex -->
   <arg name="front_cam_topic" default="front_cam/image_raw/compressed"/>
@@ -23,7 +23,7 @@
   </node>
 
   <!-- sensor head (rosserial) -->
-  <node name="serial_node_sensor_head" pkg="rosserial_python" type="serial_node.py" output="screen" respawn="true">
+  <node name="serial_node_sensor_head" pkg="rosserial_python" type="serial_node.py" output="screen" respawn="false">
     <param name="port" value="/dev/ttyUSB1" />
     <param name="baud" value="57600" />
   </node>
@@ -32,8 +32,9 @@
   <node name="motor_controller_node" pkg="francor_motor_controller" type="motor_controller" output="log">
     <param name="plus_bogie_up"   type="double" value="0.1"/>
     <param name="speed_bogie_up"  type="double" value="0.2"/>
+    <param name="climp_boost"     type="double" value="0.4"/>
   </node>
 
   <!-- thermal -->
-  <node name="seek_thermo" pkg="seekthermal_ros" type="seekthermal_ros_node"/>
+  <!--node name="seek_thermo" pkg="seekthermal_ros" type="seekthermal_ros_node" respawn="true"/-->
 </launch>
