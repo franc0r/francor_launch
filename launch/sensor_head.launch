@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="francor_servo_lx16a" type="francor_servo_lx16a_node" name="francor_servo_lx16a_node">
+    <param name="servo_xml_cfg"  value="$(find francor_launch)/param/servo_sensor_head.xml"/>
+    <param name="serial_device"  value="/dev/ttyUSB0"/>
+    <param name="rate_pos_req"   value="20.0"/>
+    <param name="rate_speed_req" value="20.0"/>
+    <param name="rate_error_req" value="0.5"/>
+    <param name="rate_temp_req"  value="0.5"/>
+    <param name="rate_vin_req"   value="1.0"/>
+  </node>
+
+  <!-- todo ajust hieght from base_link!!! -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_to_pan_link_static_tf" args="0 0 0.2 0 0 1.5708  base_link pan_link" />
+  <node pkg="tf2_ros" type="static_transform_publisher" name="pan_to_tilt_link_static_tf"      args="0 0.062 0 0 0 -1.5708 pan tilt_link" /> 
+
+
+</launch>
