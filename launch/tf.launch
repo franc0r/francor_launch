@@ -1,4 +1,0 @@
-<launch>
-  <!-- <node pkg="tf" type="static_transform_publisher" name="link_base_link_odom_broadcaster" args="0 0 0 0 0 0 odom base_link 20" /> -->
-  <node pkg="tf" type="static_transform_publisher" name="link_laser_base_link_broadcaster" args="0 0 0 0 0 0 laser base_link 20" />
-</launch>
