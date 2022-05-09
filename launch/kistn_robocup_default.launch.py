@@ -42,6 +42,12 @@ def generate_launch_description():
     robot_base_driver = IncludeLaunchDescription(
             PythonLaunchDescriptionSource([get_package_share_directory('francor_frank_base'), '/launch/frank.launch.py'])
         )
+
+
+    tf_robot = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([get_package_share_directory('francor_launch'), '/launch/tf.launch.py'])
+        )
+        
         
     return LaunchDescription([
         genius_front,
@@ -50,5 +56,6 @@ def generate_launch_description():
         sensor_head_driver,
         mux_drive_img,
         ylidar,
-        robot_base_driver
+        robot_base_driver,
+        tf_robot
     ])
