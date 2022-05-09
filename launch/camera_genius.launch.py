@@ -4,10 +4,13 @@ from launch_ros.actions import Node
 def generate_launch_description():
     ld = LaunchDescription()
 
+    camera_name='camera_front'
+
     cam_front_node = Node(
-            package='usb_cam',   
+            package='usb_cam',
             executable='usb_cam_node_exe',
-            name='front_cam',                  
+            name=camera_name,
+            namespace=camera_name,  
             parameters=[
               {"video_device": "/dev/v4l/by-path/pci-0000:00:14.0-usb-0:4.1:1.0-video-index0"},
               {"image_width": 800},
