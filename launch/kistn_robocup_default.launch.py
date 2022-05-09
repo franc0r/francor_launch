@@ -22,8 +22,8 @@ def generate_launch_description():
         )
 
     #topics to multiplex
-    front_cam_topic ="camera_front/image_raw/compressed"
-    back_cam_topic ="camera_back/image_raw/compressed"
+    front_cam_topic ="camera/front/image_raw/compressed"
+    back_cam_topic ="camera/back/image_raw/compressed"
 
     mux_drive_img = Node(package='topic_tools',   
                 executable='mux',
