@@ -6,7 +6,7 @@ def generate_launch_description():
 
     cam_front_node = Node(
             package='usb_cam',   
-            executable='usb_cam_node',
+            executable='usb_cam_node_exe',
             name='front_cam',                  
             parameters=[
               {"video_device": "/dev/v4l/by-path/pci-0000:00:14.0-usb-0:4.1:1.0-video-index0"},
