@@ -29,7 +29,7 @@ def generate_launch_description():
                 executable='mux',
                 name='mux_drive_img', 
                 arguments=[
-                    "drive_cam/compressed",
+                    "camera/drive/image_raw/compressed",
                     front_cam_topic,
                     back_cam_topic
                 ],
