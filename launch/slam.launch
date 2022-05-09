@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <!-- external parameters -->
+    <arg name="map_topic" default="map" />    <!-- topic of occupancy grid -->
+    <arg name="pose_topic" default="pose" />    <!-- topic for robot's pose -->
+    <arg name="laser_topic" default="scan" />    <!-- topic to receive laser scan -->
+    <arg name="get_map_topic" default="map" />
+
+    <arg name="x_offset" default="0.0" />
+    <arg name="y_offset" default="0.0" />
+
+    <arg name="map_size" default="11" />
+    <arg name="cellsize" default="0.05" />
+    <arg name="max_weight" default="10.0" />
+    <arg name="truncation_radius" default="3" />
+
+    <arg name="min_range" default="0.3" />
+    <arg name="max_range" default="15.0" />
+
+    <arg name="object_inflation_factor" default="0" />
+
+    <arg name="registration_mode" default="2" />
+    <arg name="icp_iterations" default="30" />
+
+    <arg name="reg_trs_max" default="1.0" />
+    <arg name="reg_sin_rot_max" default="0.5" />
+
+    <arg name="trials" default="30" />
+    <arg name="sizeControlSet" default="360" />
+    <arg name="epsThresh" default="0.15" />
+    <arg name="zrand" default="0.05" />
+    <arg name="ransac_phi_max" default="45.0" />
+
+    <arg name="tf_base_frame" default="map" />
+    <arg name="tf_child_frame" default="laser" />
+    <arg name="tf_footprint_frame" default="base_footprint_slam" />
+
+    <!-- ******************* -->
+
+    <node name="slam_node" pkg="evo_tsd_slam" type="slam_node" output="screen" respawn="true">
+        <!-- topic/node parameters -->
+        <param name="map_topic"     type="string" value="$(arg map_topic)" />                       <!-- topic of occupancy grid -->
+        <param name="pose_topic"    type="string" value="$(arg pose_topic)" />                      <!-- topic for robot's pose -->
+        <param name="laser_topic"   type="string" value="$(arg laser_topic)" />                     <!-- topic to receive laser scan -->
+        <param name="get_map_topic" type="string" value="$(arg get_map_topic)" />
+
+        <!-- map parameters -->
+        <param name="x_offset" type="double" value="$(arg x_offset)" />                             <!-- offset of robot in map in meters -->
+        <param name="y_offset" type="double" value="$(arg y_offset)" />                             <!-- offset of robot in map in meters -->
+
+        <param name="map_size" type="int" value="$(arg map_size)" />                                <!-- map size -->
+        <param name="cellsize" type="double" value="$(arg cellsize)" />                             <!-- cell size in meters -->
+        <param name="max_weight" type="double" value="$(arg max_weight)" />                         <!-- maximum weight, inverse value used for weighting incoming data -->
+        <param name="truncation_radius" type="int" value="$(arg truncation_radius)" />              <!-- radius as factor of cell size -->
+        <param name="occ_grid_time_interval" type="double" value="2.0" />                           <!-- frequency to publish map -->
+        <param name="object_inflation_factor" type="int" value="$(arg object_inflation_factor)" />  <!-- factor to inflate obstacles -->
+        <param name="use_object_inflation" type="bool" value="true" />
+
+        <!-- raycasting parameters -->
+        <param name="min_range"              type="double" value="$(arg min_range)" />              <!-- minimum range of raycaster in meters -->
+        <param name="max_range"              type="double" value="$(arg max_range)" />              <!-- maximum range of raycaster in meters -->
+        <param name="low_reflectivity_range" type="double" value="2.0" />
+
+        <!-- tf parameters -->
+        <param name="tf_base_frame"      type="string" value="$(arg tf_base_frame)" />
+        <param name="tf_child_frame"     type="string" value="$(arg tf_child_frame)" />
+        <param name="tf_footprint_frame" type="string" value="$(arg tf_footprint_frame)" />
+
+        <!-- registration parameters -->
+        <param name="registration_mode" type="int" value="$(arg registration_mode)" />    <!-- 0:ICP 1:EXPERIMENTAL 2:PDF 3:TSD_PDF -->
+
+        <!-- ICP parameters -->
+        <param name="dist_filter_max" type="double" value="0.4" />    <!-- maximum distance for matching points -->
+        <param name="dist_filter_min" type="double" value="0.02" />    <!-- minimum distance for matching points -->
+        <param name="icp_iterations" type="int" value="$(arg icp_iterations)" />    <!-- number of icp iterations -->
+        <param name="reg_trs_max" type="double" value="$(arg reg_trs_max)" />    <!-- maximum translation between two scans -->
+        <param name="reg_sin_rot_max" type="double" value="$(arg reg_sin_rot_max)" />    <!-- maximum rotation between two scans -->
+
+        <!-- parameter for TsdPdf registration -->
+        <param type="double" name="zrand"          value="$(arg zrand)" />          <!-- random probability range: [0.0;1.0[ -->
+        <param type="int"    name="trials"         value="$(arg trials)" />         <!-- Trials for RNM -->
+        <param type="double" name="epsThresh"      value="$(arg epsThresh)" />
+        <param type="int"    name="sizeControlSet" value="$(arg sizeControlSet)" /> <!-- Subsampling -->
+        <param type="double" name="ransac_phi_max" value="$(arg ransac_phi_max)" /> <!-- maximum angle for ransac matching -->
+
+   </node>
+
+   <node pkg="tf" type="static_transform_publisher" name="bf_broadcaster" args="-0.15 0.165 0 -1.570796327 0 0 laser base_footprint 50" />
+   <node pkg="francor_launch" name="qr_detection_script" type="launch_docker_qrdetection.sh" />
+</launch>

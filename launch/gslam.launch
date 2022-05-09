@@ -1,0 +1,18 @@
+<launch>
+  <!-- Parameters -->
+  <arg name="output"   default="log" />
+
+  <!-- SLAM with propability grid -->
+  <node name="cartographer_node" pkg="cartographer_ros"
+        type="cartographer_node" args="
+          -configuration_directory $(find francor_launch)/param
+          -configuration_basename gslam.lua"
+        output="$(arg output)">
+    <remap from="echoes" to="horizontal_laser_2d" />
+  </node>
+
+  <!-- Generates nav_msgs/Occupancy messages and publishes them under /map -->
+  <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros"
+        type="cartographer_occupancy_grid_node" args="-resolution 0.05" />
+
+</launch>

@@ -2,8 +2,8 @@
 <launch>
 	<node name="astra" pkg="usb_cam" type="usb_cam_node" output="screen">
 		<param name="video_device"		type="string" value="/dev/v4l/by-id/usb-Astra_Pro_HD_Camera_Astra_Pro_HD_Camera-video-index0"           />
-		<param name="image_width"			type="int" value="640"/>
-		<param name="image_height"    type="int" value="480" />
+    <param name="image_width"			type="int" value="1280"/>
+		<param name="image_height"    type="int" value="720" />
 		<param name="framerate"       type="int" value="30" />	
     <param name="pixel_format"    type="string" value="yuyv"   />      <!-- Possible values are mjpeg (default), yuyv(ps3 cam ...), uyvy -->
     <param name="camera_frame_id"    type="string" value="astra"   />
