@@ -1,5 +1,6 @@
 from launch import LaunchDescription
 from launch_ros.actions import Node
+import math
 
 def generate_launch_description():
     ld = LaunchDescription()
@@ -7,7 +8,7 @@ def generate_launch_description():
     tf2_laser_2_base_link = Node(package='tf2_ros',   
                 executable='static_transform_publisher',
                 name='link_laser_2_base_link', 
-                arguments=['-0.14', '0.17', '-0.185','0', '0', '0', '1','laser','base_link'],
+                arguments=['-0.14', '0.17', '-0.185', str(math.pi*1.5), '0', '0','laser','base_link'],
                 )
 
     tf2_base_linke_2_base_footprint = Node(package='tf2_ros',   
