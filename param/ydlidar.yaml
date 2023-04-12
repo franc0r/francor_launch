@@ -1,14 +1,23 @@
-angle_min: -120
-angle_max: 120
-range_min: 0.08
-range_max: 12
-# Sample Rate 6000 times/sec
-sample_rate: 6
-# frequency 12 kHz
-frequency: 12
-# auto reconnect
-auto_reconnect: true
-
-# parameter found in example launch file of ydlidar ros package. No idea what they do.
-low_exposure: false
-resolution_fixed: true
+ydlidar_ros2_driver_node:
+  ros__parameters:
+    port: /dev/ydlidar
+    frame_id: laser
+    ignore_array: ""
+    baudrate: 230400
+    lidar_type: 1
+    device_type: 0
+    sample_rate: 9
+    abnormal_check_count: 4
+    resolution_fixed: true
+    reversion: true
+    inverted: true
+    auto_reconnect: true
+    isSingleChannel: false
+    intensity: false
+    support_motor_dtr: false
+    angle_min: -180.0
+    angle_max: 180.0
+    range_min: 0.08
+    range_max: 12.0
+    frequency: 10.0
+    invalid_range_is_inf: false

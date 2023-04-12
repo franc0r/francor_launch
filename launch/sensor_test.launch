@@ -1,23 +1,11 @@
 <launch>
-  <arg name="img_perception"  default="/astra/image_raw"/>
 
-  <param name="/motiondetection/show_cluster_circles" value="true"/>
-  <include file="$(find ohm_rrl_motiondetection)/launch/motiondetection.launch" >
-      <arg name="input_image_topic" value="$(arg img_perception)" />
-      <arg name="img_motion_topic"  value="img_motion" />
-  </include>  
-  
-  
-  <include file="$(find ohm_rrl_perception_utility)/launch/hazmatdetection.launch" >
-      <arg name="input_image_topic" value="$(arg img_perception)" />
-      <arg name="img_haz_topic"     value="img_hazmats" />
-  </include>  
-  
-  
-  <include file="$(find ohm_rrl_qrdetection)/launch/qrdetection.launch" >
-      <arg name="input_image_topic" value="$(arg img_perception)" />
-      <arg name="img_qr_topic"      value="img_qr" />
-  </include> 
-
-
+  <!-- orbec 3d cam (only rgb)-->
+  <!-- <include file="$(find francor_launch)/launch/camera_astra.launch" /> -->
+  <node name="hazmat_startup_script" pkg="francor_launch" type="launch_docker_hazmat.sh" />
+  <node name="motion_startup_script" pkg="francor_launch" type="launch_docker_motion.sh" />
+  <!-- <node name="motion2_startup_script" pkg="francor_launch" type="launch_docker_motion2.sh /> -->
+  <node pkg="seekthermal_ros" type="seekthermal_ros_node" name="seekthermalRosNode" output="screen">
+		<rosparam file="$(find seekthermal_ros)/config/seekthermal_ros.yaml" command="load" />
+	</node> 
 </launch>

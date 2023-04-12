@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- co2 -->
+  <!-- <node name="co2_node" pkg="francor_co2" type="co2_node">
+  </node> -->
+  <!-- genius front -->
+  <include file="$(find francor_launch)/launch/camera_genius.launch" />
+  <!-- genius back -->
+  <include file="$(find francor_launch)/launch/camera_genius_back.launch" />
+
+  <!-- orbec 3d cam (only rgb)-->
+  <include file="$(find francor_launch)/launch/camera_astra.launch" />
+
+  <!-- sick tim -->
+  <!--include file="$(find francor_launch)/launch/sick_tim.launch" /-->
+
+  <!-- ydlidar F4 -->
+  <include file="$(find francor_launch)/launch/ydlidar.launch" />
+  
+  <include file="$(find francor_overlay_hack)/launch/robot_2x_overlay.launch" />
+
+  <!-- topics to multiplex -->
+  <arg name="front_cam_topic" default="front_cam/image_raw/overlay/compressed"/>
+  <arg name="back_cam_topic"  default="back_cam/image_raw/overlay/compressed"/>
+
+  <node name="mux_drive_img" pkg="topic_tools" type="mux"  args="drive_cam/compressed $(arg front_cam_topic) $(arg back_cam_topic)">
+    <!--remap from="mux/selected" to="drive_cam/select"/--> 
+  </node>
+
+  <!-- todo test this -->
+  <!-- sensor head (rosserial) -->
+  <node name="serial_node_0" pkg="rosserial_python" type="serial_node.py" output="screen" respawn="true">
+    <param name="port" value="/dev/ttyACM0" />
+    <param name="baud" value="1000000" />
+  </node>
+
+  <node name="serial_node_1" pkg="rosserial_python" type="serial_node.py" output="screen" respawn="true">
+    <param name="port" value="/dev/ttyUSB1" />
+    <param name="baud" value="57600" />
+  </node>
+
+  <node name="serial_node_2" pkg="rosserial_python" type="serial_node.py" output="screen" resawn="true">
+    <param name="port" value="/dev/ttyUSB2" />
+    <param name="baud" value="57600" />
+  </node>
+
+
+  <!-- todo -->
+  <!-- motor controller usb controll -->
+  <!--node name="bld300b_interface" pkg="francor_bld300b_interface" type="bld300b_interface_node.py" output="log" respawn="true">
+    <param name="serial_device" value="/dev/ttyACM0" type="str" />
+    <param name="timeout" value="0.8" type="double" />
+  </node-->
+
+
+  <!-- motor controller twist2rpm -->
+  <!-- rosrun francor_drives francor_drives_node _max_rpm:=30 -->
+  <node name="francor_drives_node" pkg="francor_drives" type="francor_drives_node" output="log">
+   <param name="max_rpm" value="70"/>
+  </node>
+
+
+  <!-- thermal -->
+  <!--node name="seek_thermo" pkg="seekthermal_ros" type="seekthermal_ros_node" respawn="true"/-->
+</launch>
