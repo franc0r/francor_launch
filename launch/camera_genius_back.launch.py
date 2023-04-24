@@ -11,15 +11,18 @@ def generate_launch_description():
             namespace='camera/back',
             parameters=[
               {"video_device": "/dev/v4l/by-path/pci-0000:3c:00.0-usb-0:1.4:1.0-video-index0"},
-              {"image_width": 640},
-              {"image_height": 480},
-              {"framerate": 30.0},	
+              {"image_width": 1920},
+              {"image_height": 1080},
+              {"framerate": 30.0},
               {"pixel_format": "mjpeg2rgb"}, #Possible values are mjpeg (default), yuyv(ps3 cam ...), uyvy
-              {"camera_frame_id": "camera"},
+              {"frame_id": "camera_back"},
               {"camera_info_url": "" },
               {"camera_name": "genius"},
               {"autoexposure": False},
-              {"best_effort": True}
+              {"best_effort": True},
+              {"do_scale": True},
+              {"scale_width": 960},
+              {"scale_height": 540},
             ]
     )
     ld.add_action(cam_front_node)

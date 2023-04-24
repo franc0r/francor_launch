@@ -20,7 +20,7 @@ def generate_launch_description():
               {"image_height": 1080},
               {"framerate": 10.0},
               {"pixel_format": "mjpeg2rgb"}, #Possible values are mjpeg (default), yuyv(ps3 cam ...), uyvy
-              {"camera_frame_id": "camera_tele"},
+              {"frame_id": "camera_tele"},
               {"camera_info_url": "file://" + os.path.join(share_dir, 'param', 'camera_tele_info.yaml') },
               {"camera_name": "tele"},
               {"autoexposure": False},
