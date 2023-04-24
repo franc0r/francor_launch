@@ -43,6 +43,10 @@ def generate_launch_description():
                                 parameters=[parameter_file],
                                 namespace='/',
                                 respawn=True,
+                                remappings=[
+                                  #pub
+                                  ('/scan', '/tsd_slam/laser'),
+                                ]
                                 )
 
     return LaunchDescription([

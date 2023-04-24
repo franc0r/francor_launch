@@ -34,6 +34,9 @@ def generate_launch_description():
                     back_cam_topic
                 ],
             )
+    co2_sensor = Node(package='francor_co2',
+                      executable='co2_sensor_interface',
+                      name='co2_sensor')
     
     sensor_head_driver = IncludeLaunchDescription(
             PythonLaunchDescriptionSource([get_package_share_directory('francor_servo_lx16a'), '/launch/default.launch.py'])
@@ -47,15 +50,20 @@ def generate_launch_description():
     tf_robot = IncludeLaunchDescription(
             PythonLaunchDescriptionSource([get_package_share_directory('francor_launch'), '/launch/tf.launch.py'])
         )
-        
-        
+
+    thermal_sensor = Node(package='francor_thermal',
+                      executable='seek_node',
+                      name='thermal_sensor')
+
     return LaunchDescription([
         genius_front,
         genius_back,
-        genius_front_tele,
+        #  genius_front_tele,
         sensor_head_driver,
         mux_drive_img,
         ylidar,
         robot_base_driver,
-        tf_robot
+        tf_robot,
+        co2_sensor,
+        thermal_sensor
     ])
