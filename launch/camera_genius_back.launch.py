@@ -10,7 +10,7 @@ def generate_launch_description():
             name='usb_cam_back_node',
             namespace='camera/back',
             parameters=[
-              {"video_device": "/dev/v4l/by-path/pci-0000:3c:00.0-usb-0:1.3:1.0-video-index0"},
+              {"video_device": "/dev/v4l/by-path/pci-0000:3c:00.0-usb-0:1.4:1.0-video-index0"},
               {"image_width": 640},
               {"image_height": 480},
               {"framerate": 30.0},	

@@ -15,7 +15,7 @@ def generate_launch_description():
             name='usb_cam_tele_node',
             namespace='camera/tele',
             parameters=[
-              {"video_device": "/dev/v4l/by-path/pci-0000:00:14.0-usb-0:4.3:1.0-video-index0"},
+              {"video_device": "/dev/v4l/by-path/pci-0000:00:14.0-usb-0:4.1:1.0-video-index0"},
               {"image_width": 1920},
               {"image_height": 1080},
               {"framerate": 10.0},
