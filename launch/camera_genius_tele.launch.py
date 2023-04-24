@@ -1,8 +1,13 @@
 from launch import LaunchDescription
 from launch_ros.actions import Node
 
+from ament_index_python.packages import get_package_share_directory
+import os
+
 def generate_launch_description():
     ld = LaunchDescription()
+
+    share_dir = get_package_share_directory('francor_launch')
 
     cam_tele_node = Node(
             package='usb_cam',
@@ -16,7 +21,7 @@ def generate_launch_description():
               {"framerate": 10.0},
               {"pixel_format": "mjpeg2rgb"}, #Possible values are mjpeg (default), yuyv(ps3 cam ...), uyvy
               {"camera_frame_id": "camera_tele"},
-              {"camera_info_url": "" },
+              {"camera_info_url": "file://" + os.path.join(share_dir, 'param', 'camera_tele_info.yaml') },
               {"camera_name": "tele"},
               {"autoexposure": False},
               {"best_effort": True}
